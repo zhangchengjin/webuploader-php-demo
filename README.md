@@ -3,6 +3,9 @@ webuploader和php实现的demo
 用百度的开源产品webuploader做多文件上传，网上有很多教程写的很不清楚，所以便有了这个demo   
 这个demo 兼容ie6+,chrome,safari,firefox以及国内所有主流厂商的浏览器   
 
+## demo展示
+![demo](http://zhangchengjin.github.io/demo/webuploader-php-demo.png) 
+
 ## 注意：   
 * 本demo不支持官方提供的 chunk 和 chunks
 * 本demo在服务端用了php最基本的文件上传实现
