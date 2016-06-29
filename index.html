@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传图片</title>
+    <script type="text/javascript" src="skin/uploader/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="skin/uploader/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="skin/css/index.css">
+    <script type="text/javascript" src="skin/uploader/webuploader.min.js"></script>
+</head>
+<body>
+
+上传图片：<p/>
+    <div id="imgContainer" class="upload_container">
+        <ul class="img_box">
+            <li id="picker"><div><img src="skin/img/btn.gif"></div></li>
+        </ul>
+    </div>
+
+<script type="text/javascript">
+
+    // 文件上传
+    jQuery(function () {
+        var $ = jQuery,
+                $list = $('#imgContainer'),
+                state = 'pending',
+                uploader;
+        if ( !WebUploader.Uploader.support() ) {
+            alert( 'Web Uploader 不支持您的浏览器！如果你使用的是IE浏览器，请尝试升级 flash 播放器');
+            throw new Error( 'WebUploader does not support the browser you are using.' );
+        }
+        uploader = WebUploader.create({
+            accept: {
+                title: 'Images',
+                extensions: 'jpg,jpeg,png',
+                mimeTypes: 'image/*'
+            },
+            swf: '/static/webuploader/skin/uploader/Uploader.swf',
+            server: 'server/fileupload.php',
+            pick: {
+                id: '#picker',
+                multiple: false
+            },
+            auto:true,
+            fileNumLimit: 10,
+            fileSingleSizeLimit: 2 * 1024 * 1024    // 2 M
+        });
+
+        uploader.on('uploadSuccess', function (file,response) {
+            if(response.result == 'success'){
+                $('#picker').before("<li class='img_box_li'><div><img src="+response.src+" /></div></li>");
+            }
+        });
+
+        uploader.on('uploadError', function (file) {
+            console.log("上传失败"+file);
+        });
+
+        uploader.on('error', function (file) {
+            if(file == 'F_DUPLICATE'){
+                alert('您已经上传过这张图片了，换一张吧');
+            }else if(file == 'Q_TYPE_DENIED'){
+                alert('只能上传jpg、jpeg、png格式的图片，请重新上传');
+            }else if(file == 'F_EXCEED_SIZE'){
+                alert('上传的图片超过2M，请重新上传');
+            }else if(file == 'Q_EXCEED_NUM_LIMIT'){
+                alert('最多只能上传10张图片');
+            }else{
+                console.log(file);
+            }
+        });
+
+        uploader.on('all', function (type) {
+            if (type === 'startUpload') {
+                state = 'uploading';
+            } else if (type === 'stopUpload') {
+                state = 'paused';
+            } else if (type === 'uploadFinished') {
+                state = 'done';
+            }
+        });
+
+    });
+</script>
+</body>
+</html>
