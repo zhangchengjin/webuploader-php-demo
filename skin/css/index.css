@@ -1,0 +1,39 @@
+body div{
+    margin: 0;
+    padding: 0;
+}
+.upload_container{
+    width: 780px;
+    height: auto;
+    overflow: hidden;
+    padding: 5px 0px 5px 5px;
+}
+.img_box{
+    margin: 0;
+    padding: 0;
+}
+.img_box li{
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    list-style: none;
+}
+.img_box_li{
+    border: 1px solid #b1b1b1;
+}
+.img_box li div{
+    width: 148px;
+    height: 113px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+    *font-size:99px; /*ie6 ie7œ¬ π”√*/
+}
+.img_box li div img{
+    vertical-align: middle;
+}
+.img_box img{
+    max-width: 144px;
+    max-height: 110px;
+}
