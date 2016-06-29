@@ -37,3 +37,4 @@ $fileName = $todayDir.DIRECTORY_SEPARATOR.uniqid('zr').$listOfFileType[$fileType
 move_uploaded_file($_FILES["file"]["tmp_name"],$fileName);
 $src = 'server'.DIRECTORY_SEPARATOR.$fileName;
 die('{"jsonrpc" : "2.0", "result" : "success", "src" : "'.$src.'"}');
+?>
